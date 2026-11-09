@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Práctica DOM — Reactivos</title>
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./script.js"></script>
+</head>
+<body>
+  <header id="main-header" class="header">
+    <h1 id="title">Práctica DOM: Reactivos</h1>
+    <nav id="main-nav" class="nav">
+      <a id="home-link" href="#">Home</a>
+      <a id="about-link" href="#">About</a>
+      <a id="contact-link" href="#">Contact</a>
+    </nav>
+  </header>
+
+  <main id="app" class="app">
+    <section id="panel" class="panel">
+      <h2>Panel de control</h2>
+      <div class="controls">
+        <input id="input-title" type="text" placeholder="titulo">
+        <input id="input-description" type="text" placeholder="Descripción">
+        <button id="btn-create" class="boring-btn">Crear tarjeta</button>
+      </div>
+
+      <article id="cards" class="cards">
+        <!-- tarjetas dinámicas -->
+        <div class="card template" data-role="template" hidden>
+          <h3 class="card-title">TITULO</h3>
+          <p class="card-desc">Descripción</p>
+          <img class="card-img" src="" alt="imagen">
+          <div class="card-actions">
+            <button class="boring-btn edit">Editar</button>
+            <button class="boring-btn delete">Eliminar</button>
+          </div>
+        </div>
+      </article>
+
+      <aside id="sidebar" class="sidebar">
+        <h3>Galería</h3>
+        <div id="gallery" class="gallery">
+          <img class="" src="" alt="1" data-id="1">
+          <img class="" src="" alt="2" data-id="2">
+          <img class="" src="" alt="3" data-id="3">
+        </div>
+        <p id="gallery-info" class="muted">Haz clic en una miniatura</p>
+      </aside>
+    </section>
+
+    <section id="list-section" class="list-section">
+      <h2>Lista de tareas</h2>
+      <ul id="todo-list" class="todo-list">
+        <li class="todo">Comprar material <button class="boring-btn done">OK</button></li>
+        <li class="todo">Enviar correo <button class="boring-btn done">OK</button></li>
+      </ul>
+
+      <div id="links" class="links">
+      </div>
+      <div id="text"></div>
+    </section>
+
+    <section id="form-section" class="form-section">
+      <h2>Formulario de ejemplo</h2>
+      <form id="demo-form">
+        <label for="email">Email:</label>
+        <input id="email" type="email" value="alguien@ejemplo.com">
+        <label for="desc">Mensaje:</label>
+        <textarea id="desc">Hola</textarea>
+        <button id="submit-btn" type="submit" class="boring-btn">Enviar</button>
+      </form>
+    </section>
+  </main>
+
+  <footer id="main-footer" class="footer">
+    <p id="copyright">© 2025 - Curso</p> 
+  </footer>
+</body>
+</html>
