@@ -161,7 +161,7 @@ cards.appendChild(nuevaCard);
 */
 // TODO Reactivo 11: añadir classList.add('highlight') a la última .card
 
-
+cards.lastElementChild.classList.add('highlight');
 
 
 /* Reactivo 12
@@ -171,7 +171,9 @@ cards.appendChild(nuevaCard);
 */
 // TODO Reactivo 12: añadir listener que haga toggle de la clase 'fiesta' en el botón
 
-
+document.querySelector('#btn-create').addEventListener('click', (e) => {
+   e.target.classList.toggle('fiesta');
+});
 
 
 /* Reactivo 13
@@ -182,7 +184,13 @@ cards.appendChild(nuevaCard);
 */
 // TODO Reactivo 13: Eliminar la tarjeta con el evento 'click" de su boton eliminar
 
+function eliminarTarjeta(e) {
+   e.target.parentNode.parentNode.remove();
+}
 
+document.querySelectorAll('.delete').forEach(btn => {
+   btn.addEventListener('click', eliminarTarjeta);
+});
 
 
 /* Reactivo 14
@@ -192,7 +200,9 @@ cards.appendChild(nuevaCard);
 */
 // TODO Reactivo 14: Añadir 'super-fiesta' a .done
 
-
+document.querySelectorAll('.done').forEach(btn => {
+   btn.classList.add('super-fiesta');
+});
 
 
 /* Reactivo 15
@@ -202,7 +212,12 @@ cards.appendChild(nuevaCard);
 */
 // TODO Reactivo 15: crear y añadir enlace con setAttribute
 
-
+const enlace = document.createElement('a');
+enlace.setAttribute('href', 'https://spideytracker.net/intl/latam/');
+enlace.setAttribute('target', '_blank');
+enlace.textContent = 'Ir a Spidey Tracker';
+document.getElementById('links').appendChild(enlace);
+console.log(enlace.getAttribute('href'));
 
 
 /* Reactivo 16
