@@ -228,7 +228,13 @@ console.log(enlace.getAttribute('href'));
 */
 // TODO Reactivo 16: crear dos divs que muestren la diferencia innerHTML / textContent
 
-
+const divHTML = document.createElement('div');
+divHTML.innerHTML = '<strong>Hola con innerHTML</strong>';
+const divText = document.createElement('div');
+divText.textContent = '<strong>Hola con textContent</strong>';
+const textContainer = document.getElementById('text');
+textContainer.appendChild(divHTML);
+textContainer.appendChild(divText);
 
 
 /* Reactivo 17
@@ -238,7 +244,9 @@ console.log(enlace.getAttribute('href'));
 */
 // TODO Reactivo 17: aplicar estilos inline a la primera tarjeta
 
-
+const primeraCard = cards.querySelector('.card:not([hidden])');
+primeraCard.style.backgroundColor = '#123456';
+primeraCard.style.borderRadius = '12px';
 
 
 /* Reactivo 18
@@ -250,7 +258,15 @@ console.log(enlace.getAttribute('href'));
 */
 // TODO Reactivo 18: create card
 
-
+document.getElementById('btn-create').addEventListener('click', () => {
+   const titulo = document.getElementById('input-title').value;
+   const descripcion = document.getElementById('input-description').value;
+   const imgSrc = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjQDhHm3HLNNZRoLeI5Wqi1FyLRi_6hHYE-pX-ZNyqxg&s=10';
+   const nuevaCard = crearCard(titulo, descripcion, imgSrc);
+   nuevaCard.querySelector('.delete').addEventListener('click', eliminarTarjeta);
+   nuevaCard.querySelector('.edit').addEventListener('click', editarTarjeta);
+   cards.appendChild(nuevaCard);
+});
 
 
 /* Reactivo 19
@@ -261,7 +277,15 @@ console.log(enlace.getAttribute('href'));
 */
 // TODO Reactivo 19: set y get de value
 
+function editarTarjeta(e) {
+   const card = e.target.parentNode.parentNode;
+   document.getElementById('input-title').value = card.querySelector('.card-title').textContent;
+   document.getElementById('input-description').value = card.querySelector('.card-desc').textContent;
+}
 
+document.querySelectorAll('.edit').forEach(btn => {
+   btn.addEventListener('click', editarTarjeta);
+});
 
 
 /* Extra
@@ -271,8 +295,13 @@ console.log(enlace.getAttribute('href'));
 */
 // TODO Reactivo 20: usar prepend y append
 
+const mensajeInicio = document.createElement('p');
+mensajeInicio.textContent = 'Mensaje al inicio';
+cards.prepend(mensajeInicio);
 
-
+const mensajeFinal = document.createElement('p');
+mensajeFinal.textContent = 'Mensaje al final';
+cards.append(mensajeFinal);
 
 /* Extra
    - Objetivo: Usar form submit y event.preventDefault()
@@ -281,7 +310,16 @@ console.log(enlace.getAttribute('href'));
 */
 // TODO Reactivo 23: capturar submit del form y manejar datos con FormData
 
+document.getElementById('email').setAttribute('name', 'email');
+document.getElementById('desc').setAttribute('name', 'mensaje');
 
+demoForm.addEventListener('submit', (e) => {
+   e.preventDefault();
+   const fd = new FormData(e.target);
+   console.log('Email:', fd.get('email'));
+   console.log('Mensaje:', fd.get('mensaje'));
+   e.target.reset();
+});
 
 
 /* Extra
@@ -291,7 +329,9 @@ console.log(enlace.getAttribute('href'));
 */
 // TODO Reactivo 24: añadir listener con once:true
 
-
+document.getElementById('home-link').addEventListener('click', () => {
+   alert('Este mensaje solo aparecerá una vez');
+}, { once: true });
 
 
 /* Extra
@@ -302,7 +342,24 @@ console.log(enlace.getAttribute('href'));
 */
 // TODO Reactivo 25: demostrar stopPropagation
 
+const contenedor = document.createElement('div');
+contenedor.style.border = '1px solid black';
+contenedor.style.padding = '12px';
+contenedor.textContent = 'Contenedor (haz click aquí) ';
+contenedor.addEventListener('click', () => {
+   contenedor.style.backgroundColor = 'darkgreen';
+   console.log('El contenedor reaccionó');
+});
 
+const botonStop = document.createElement('button');
+botonStop.textContent = 'Botón con stopPropagation';
+botonStop.addEventListener('click', (e) => {
+   e.stopPropagation();
+   console.log('Solo reaccionó el botón, no el contenedor');
+});
+
+contenedor.appendChild(botonStop);
+document.getElementById('list-section').appendChild(contenedor);
 
 
 /* Extra
@@ -312,7 +369,8 @@ console.log(enlace.getAttribute('href'));
 */
 // TODO Reactivo 27: usar outerHTML para reemplazar elemento
 
-
+const seccionForm = document.querySelector('#form-section');
+seccionForm.outerHTML = '<button id="new-btn">Nuevo</button>';
 
 
 /* Extra
@@ -321,3 +379,13 @@ console.log(enlace.getAttribute('href'));
    - Pista: const parent = querySelector('#links'); parent.replaceChild(newNode, oldNode);
 */
 // TODO Reactivo 28: reemplazar un hijo con replaceChild
+
+const padreLinks = document.querySelector('#links');
+const nodoViejo = document.createElement('p');
+nodoViejo.textContent = 'Este es un nodo viejo';
+padreLinks.appendChild(nodoViejo);
+
+const nodoNuevo = document.createElement('a');
+nodoNuevo.setAttribute('href', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThrJ9aKDeMCbond46_R7D_Bs-HyeL750QKIlXNlNXNZA&s=10');
+nodoNuevo.textContent = ' Este es un nodo nuevo';
+padreLinks.replaceChild(nodoNuevo, nodoViejo);
